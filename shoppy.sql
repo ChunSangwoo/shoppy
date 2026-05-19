@@ -62,6 +62,9 @@ desc member;
 
 select curdate() from dual;
 
-select const(id) as isFind
-	from member where id = 'test99'; 
+
+
+
+
+
 

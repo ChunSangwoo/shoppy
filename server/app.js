@@ -1,9 +1,9 @@
-import express from "express";
-import cors from "cors";
-import dotenv from "dotenv";
-import productsRouter from "./routes/products.js";
-import returnRouter from "./routes/return.js";
-import memberRouter from "./routes/member.js";
+import express from 'express';
+import cors from 'cors';
+import dotenv from 'dotenv';
+import productsRouter from './routes/products.js';
+import returnRouter from './routes/return.js';
+import memberRouter from './routes/member.js';
 
 dotenv.config();
 
@@ -15,10 +15,11 @@ app.use(cors());
 app.use(express.json());
 
 //라우팅 작업
-app.use("/products", productsRouter);
-app.use("/return", returnRouter);
-app.use("/member", memberRouter);
+app.use('/products', productsRouter);
+app.use('/return', returnRouter);
+app.use('/member', memberRouter);
+
 
 app.listen(PORT, () => {
-  console.log(`서버 실행 => ${PORT}`);
+    console.log(`서버 실행 => ${PORT}`);    
 });
