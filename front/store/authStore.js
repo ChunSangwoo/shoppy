@@ -23,7 +23,9 @@ export const useAuthStore = create((set) => ({
       cartItems: [],
     }),
 
-  setCartCount: (count) => set({ cartCount: count }),
+  initCartCount: (count) => set(() => ({ cartCount: count })),
+
+  setCartCount: () => set((state) => ({ cartCount: state.cartCount + 1 })),
 
   setCartItems: (items) =>
     set({
