@@ -1,9 +1,9 @@
-import { Link, useNavigate } from "react-router-dom";
-import { useEffect } from "react";
-import { FiShoppingBag } from "react-icons/fi";
-import { GiShoppingCart } from "react-icons/gi";
-import { useAuthStore } from "@/store/authStore.js";
-import { axiosPost } from "../../utils/dataFetch.js";
+import { Link, useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
+import { FiShoppingBag } from 'react-icons/fi';
+import { GiShoppingCart } from 'react-icons/gi';
+import { useAuthStore } from '@/store/authStore.js';
+import { axiosPost } from '../../utils/dataFetch.js';
 
 export default function Header() {
   const navigate = useNavigate();
@@ -16,20 +16,21 @@ export default function Header() {
   const initCartCount = useAuthStore((s) => s.initCartCount);
   const isUpdateFlag = useAuthStore((s) => s.isUpdateFlag);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      if (!isLogin) return;
+  useEffect(()=>{
+    const fetchData = async() => {
+      if(!isLogin) return;
 
-      const result = await axiosPost("/carts/count", { userId: userId });
+      const result = await axiosPost('/carts/count', {"userId": userId});
       result.count ? initCartCount(parseInt(result.count)) : initCartCount(0);
-    };
+    }    
     fetchData();
   }, [isLogin, isUpdateFlag]);
 
+
   const handleLogout = () => {
     logout();
-    alert("로그아웃 되었습니다");
-    navigate("/");
+    alert('로그아웃 되었습니다');
+    navigate('/');
   };
 
   return (
@@ -40,34 +41,22 @@ export default function Header() {
           <span> 👗👠🛍👓 Shoppy </span>
         </Link>
         <nav className="header-right">
-          {isLogin && (
-            <span>
-              [{userId}::{role}]
-            </span>
-          )}
+          {isLogin && <span>[{userId}::{role}]</span>}
           <Link to="/products">Products</Link>
           <Link to="/cart" className="header-icons-cart-link">
             <GiShoppingCart className="header-icons" />
             <span className="header-icons-cart">{cartCount}</span>
           </Link>
           {authChecked && !isLogin && (
-            <Link to="/login">
-              <button type="button">Login</button>
-            </Link>
+            <Link to="/login"><button type="button">Login</button></Link>
           )}
           {authChecked && isLogin && (
-            <button type="button" onClick={handleLogout}>
-              Logout
-            </button>
+            <button type="button" onClick={handleLogout}>Logout</button>
           )}
           {!isLogin && (
-            <Link to="/signup">
-              <button type="button">Signup</button>
-            </Link>
+            <Link to="/signup"><button type="button">Signup</button></Link>
           )}
-          <Link to="/support">
-            <button type="button">Support</button>
-          </Link>
+          <Link to="/support"><button type="button">Support</button></Link>
         </nav>
       </div>
     </div>

@@ -79,3 +79,4 @@ select * from view_cartlist where id='test00';
 select * from information_schema.views 
 	where table_schema = 'shoppy';
  
+
