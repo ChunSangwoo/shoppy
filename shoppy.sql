@@ -76,7 +76,14 @@ select sum(qty) as qty from cart where id ='test00';
 show tables;
 
 select * from view_cartlist where id='test00';
+
 select * from information_schema.views 
 	where table_schema = 'shoppy';
+show tables;
+select * from orders;
+select * from member; 
+select * from cart;   
+
+
  
 
