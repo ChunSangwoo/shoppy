@@ -7,11 +7,11 @@ export const useAuthStore = create((set) => ({
   isLogin: false,
   authChecked: true, // DB 없으므로 즉시 true
   cartCount: 0,
-  cartItems: [], // 로컬 장바구니 아이템 목록
+  cartList: [], // 장바구니 리스트 공유 - Cart, Checkout 컴포넌트
+  isUpdateFlag: false, // 장바구니 리스트 수량 변경
 
   login: ({ userId, role, accessToken, isLogin }) =>
     set({ userId, role, accessToken, isLogin, authChecked: true }),
-
   logout: () =>
     set({
       userId: null,
@@ -20,16 +20,11 @@ export const useAuthStore = create((set) => ({
       isLogin: false,
       authChecked: true,
       cartCount: 0,
-      cartItems: [],
     }),
 
   initCartCount: (count) => set(() => ({ cartCount: count })),
-
   setCartCount: () => set((state) => ({ cartCount: state.cartCount + 1 })),
-
-  setCartItems: (items) =>
-    set({
-      cartItems: items,
-      cartCount: items.reduce((sum, i) => sum + i.qty, 0),
-    }),
+  setIsUpdateFlag: () =>
+    set((state) => ({ isUpdateFlag: !state.isUpdateFlag })),
+  setCartList: (cartList) => set(() => ({ cartList: cartList })),
 }));
